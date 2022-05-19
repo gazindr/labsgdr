@@ -1,0 +1,121 @@
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>Газин Д.Р., студент группы ПИ-321</title>
+
+<style>
+fieldset.gen {
+     background-color: #888888;
+     font-size:24px;
+     padding:10px;
+     width:750px;
+     position: absolute;
+     top: 0%;
+     left: 50%;
+     transform: translateX(-50%);
+}
+legend.legend {
+ background-color: #000000;
+ color: #BABABA;
+ padding: 5px 10px;
+ font-size:24px;
+}
+button.final {
+     padding:5px;
+     margin: 10px;
+     position: relative;
+     left: 90%;
+     transform: translate(-50%, 0);
+}
+
+fieldset.com {
+     background-color: #A9A9A9;
+     font-size:15px;
+     padding:22px;
+}
+
+fieldset.f {
+     margin: 10px;
+     background-color: #eeeeee;
+     font-size:16px;
+     padding:18px;
+}
+
+
+
+input {
+     margin: 5px;
+}
+
+
+ </style>
+ <script type="text/javascript" src="libs/jquery-3.6.0.min.js"></script>
+ </head>
+ <body background="images/banana.gif">
+<fieldset class="gen">
+<fieldset class="com">
+<legend align="center" class="legend"> Новости </legend>
+
+</fieldset>
+  <button id='finish' class="final">Загрузить еще</button>
+</fieldset>
+<script>
+
+$(document).ready(function(){
+$( "<p>параграф</p>" );
+	let k=0;
+	var cloneCount = 0;
+	var i = 0;
+	var current=0;
+	var ids=0;
+	var circle=3;
+	var need=3;
+	
+	$.ajax({
+        type: "GET",
+        url: "getdata_3.php",
+        data: {fcurrent:current, fneed:need}
+			}).done(function( data )
+				{
+					const myJSON = JSON.stringify(data);
+					let obj = JSON.parse(data)
+					for (var q = 0; q < need; q++) {  
+						$('.com').append("<fieldset class='f' id='f1'>  <h2 id=h"+ids+" class='gg'>Заголовок</h2> <p id=p"+ids+"></p> <img class='n' id=img"+ids+" width='700' height='500'  alt='1'> </fieldset>");
+						$( "#h"+ids ).text(obj.header[q]);
+						$( "#p"+ids ).text(obj.desc[q]);
+						$("#img"+ids).prop('src', "images/"+obj.img[q]);
+						ids++;
+					}
+				});
+	
+
+
+$('#finish').on('click', function(){ /// press button
+	current = current + need;
+	$.ajax({
+        type: "GET",
+        url: "getdata_3.php",
+        data: {fcurrent:current, fneed:need}
+    }).done(function( data )
+        {
+			const myJSON = JSON.stringify(data);
+			let obj = JSON.parse(data)
+			for (var q = 0; q < need; q++) {
+				ids++;
+				if(obj.header[q]!=null){
+					$('.com').append("<fieldset class='f' id='f1'>  <h2 id=h"+ids+" class='gg'>Заголовок</h2> <p id=p"+ids+"></p> <img class='n' id=img"+ids+" width='700' height='500'  alt='1'> </fieldset>");
+					$( "#h"+ids ).text(obj.header[q]);
+					$( "#p"+ids ).text(obj.desc[q]);
+					$("#img"+ids).prop('src', "images/"+obj.img[q]);
+				}else{
+					$( "#finish" ).text("Новостей больше нет");
+				}
+			}
+        });
+
+});
+});
+
+ </script>
+ </body>
+</html>

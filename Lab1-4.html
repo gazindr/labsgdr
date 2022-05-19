@@ -1,0 +1,29 @@
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Газин Д.Р., студент группы ПИ-321</title>
+</head>
+<body>
+<script language="JavaScript" type="text/JavaScript">
+
+var x, y, pass, enter;
+
+pass="admin";
+enter=prompt("Введите пароль(пароль - admin, вдруг кто не знал)",'');
+if(enter==pass){
+    let z=alert("Пароль верен");
+    x=parseInt(prompt("Введите значение х",'')); // метод parseInt() переводит строку в целое
+    y=parseInt(prompt("Введите значение у",'')); // число
+    if(x<y){
+        alert(" Максимальное число - y, а именно - ", y);
+    }else if(x==y){
+        alert(" Числа равны");
+    }else{
+        alert(" Максимальное число - x, а именно - ", x);
+    }
+}else{
+    alert("Пароль неверен, ну написал же, что admin");
+}
+</script>
+</body>
+</html> 

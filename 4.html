@@ -1,0 +1,458 @@
+<!doctype html>
+<html lang="us">
+<head>
+
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="jquery-ui.css" rel="stylesheet">
+	<title>tutu ru</title>
+		
+	<style>
+	body{
+		font-family: "Trebuchet MS", sans-serif;
+		margin: 100px;
+		padding-left: 200px;
+		padding-right: 200px;
+    	background: url("images/post_5ba5bf16a44d52.png") #aaaaaa;
+}
+	mark {
+    background-color: red;
+    color: white;
+}
+	.demoHeaders {
+		margin-top: 2em;
+	}
+	#dialog-link {
+		padding: .4em 1em .4em 20px;
+		text-decoration: none;
+		position: relative;
+	}
+	#dialog-link span.ui-icon {
+		margin: 0 5px 0 0;
+		position: absolute;
+		left: .2em;
+		top: 50%;
+		margin-top: -8px;
+	}
+	#modal_form {
+	width: 400px;
+	height: 400px; /* Рaзмеры дoлжны быть фиксирoвaны */
+	border-radius: 5px;
+	border: 3px #000 solid;
+	background: #fff;
+	position: fixed; /* чтoбы oкнo былo в видимoй зoне в любoм месте */
+	top: 45%; /* oтступaем сверху 45%, oстaльные 5% пoдвинет скрипт */
+	left: 50%; /* пoлoвинa экрaнa слевa */
+	margin-top: -150px;
+	margin-left: -150px; /* тут вся мaгия центрoвки css, oтступaем влевo и вверх минус пoлoвину ширины и высoты сooтветственнo =) */
+	display: none; /* в oбычнoм сoстoянии oкнa не дoлжнo быть */
+	opacity: 0; /* пoлнoстью прoзрaчнo для aнимирoвaния */
+	z-index: 5; /* oкнo дoлжнo быть нaибoлее бoльшем слoе */
+	padding: 20px 10px;
+}
+	#icons {
+		margin: 0;
+		padding: 0;
+	}
+	#icons li {
+		margin: 2px;
+		position: relative;
+		padding: 4px 0;
+		cursor: pointer;
+		float: left;
+		list-style: none;
+	}
+	#icons span.ui-icon {
+		float: left;
+		margin: 0 4px;
+	}
+	.fakewindowcontain .ui-widget-overlay {
+		position: absolute;
+	}
+	.ui-textfield {
+    font: inherit;
+    color: inherit;
+    background: none;
+    text-align: inherit;
+    outline: none;
+    cursor: text;	
+	}
+	
+	select {
+		width: 200px;
+	}
+	TD.leftcol {
+    width: 110px;
+    vertical-align: middle;
+    }
+    input.text { margin-bottom:12px; width:95%; padding: .4em; }
+    fieldset { padding:0; border:0; margin-top:25px; }
+    h1 { font-size: 1.2em; margin: .6em 0; }
+    div#users-contain { width: 350px; margin: 20px 0; }
+    div#users-contain table { margin: 1em 0; border-collapse: collapse; width: 100%; }
+    div#users-contain table td, div#users-contain table th { border: 1px solid #eee; padding: .6em 10px; text-align: left; }
+    .ui-dialog .ui-state-error { padding: .3em; }
+    .validateTips { border: 1px solid transparent; padding: 0.3em; }
+    #header {
+	height: 300px;
+	margin-bottom: 15px;
+	background-image: url("images/post_5ba5bf16a44d52.png");
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+	#header .pages {
+		list-style-type: none;
+		height: 39px;
+		padding-top: 3px;
+		float: left;
+	}
+		#header .pages li {
+			float: left;
+		}
+		#header .pages li a {
+			display: block;
+			font-size: 0.9em;
+			font-weight: bold;
+			color: white;
+			text-transform: uppercase;
+			padding: 12px 15px;
+			text-decoration: none;
+		}
+		#header .pages li a:hover {
+			text-decoration: underline;
+		}
+	#header form {
+		width: 245px; height: 26px;
+		background: url(images/search.gif) no-repeat 0 8px;
+		float: right;
+		padding: 8px 30px 0 0;
+	}
+		#header form input {
+			border: 0;
+			float: left;
+			width: 170px;
+			margin: 5px;
+		}
+		#header form button {
+			border: 0;
+			text-indent: -9999px;
+			font-size: 0;
+			width: 60px; height: 26px;
+			float: right;
+			background-color: transparent;
+		}
+	#header .logo {
+		clear: both;
+		float: left;
+		padding: 30px 0 36px 20px;
+		
+	}
+		#header .logo h1 {
+			font-size: 2em;
+			text-transform: uppercase;
+		}
+			#header .logo h1 a {
+				text-decoration: none;
+			}
+		#header .logo p {
+			color: #888888;
+			font-weight: bold;
+			font-size: 1.2em;
+			text-transform: uppercase;
+		}
+	#header .sponsor {
+		float: right;
+		padding: 25px 0;
+	}
+	#header .categories {
+		clear: both;
+		list-style-type: none;
+		height: 40px;
+		border-bottom: 5px solid darkred;
+		border-top: 1px solid #DDDDDD;
+		overflow: hidden;
+	}
+		#header .categories li {
+			float: left;
+		}
+		#header .categories li a {
+			display: block;
+			padding: 13px;
+			color: #333333;
+			border-right: 1px solid #dddddd;
+			text-decoration: none;
+		}
+		#header .categories li a:hover {
+			background-color: darkred;
+			color: #ffffff;
+		}
+	</style>
+	<div align="center" style="float: right;width: 1100px;margin: 20px 40px 20px 20px;font-size: 5em; color: white; text-shadow: 1px 1px 2px black, 0 0 1em black;">Найти работу</div>
+	<div align="center">
+	     <form class="form-inline">
+	    	    <div align="center" class="text-field">
+                    <input class="text-field__input" size="50" type="text" placeholder="Город" >
+                    <button ><img height="15" width="15" src="https://w7.pngwing.com/pngs/86/111/png-transparent-computer-icons-swap-others.png"></button>
+                    <input class="text-field__input" size="50" type="text" placeholder="Профессия" >
+                </div>
+		
+         </form>
+         </div>
+</head>
+<body>
+	<header class="head">
+	
+	</header>
+  <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+<div id="accordion">
+	<h3>Видеомонтажер</h3>
+	<div>
+	<table width="100%" cellspacing="0" cellpadding="0">
+		<tr> 
+			<td class="leftcol"><img src="https://frankfurt.apollo.olxcdn.com/v1/files/bdcfrsxtgble-KZ/image;s=997x667" width="400" height="300"></td>
+			<h1>Нужен видеомонтажер на постоянную работу </h1>
+			<td class="leftcol"></td>
+			<td class="leftcol"></td>
+		</tr>
+		<tr></tr>
+		<tr></tr>
+		<tr> 
+			<td class="leftcol"  align="left"></td>
+			<td class="leftcol"  align="left"></td>
+			<td class="leftcol"></td>
+			<td class="leftcol"></td>
+			<td class="leftcol"></td>
+		</tr>
+		<tr>
+		<td class="leftcol" valign="middle">45000 ₽</td>
+		<td valign="middle"></td>
+		<td valign="middle"></td>
+		<td valign="middle"></td>
+		<td valign="middle" align="center"><button id="buyutur1">Откликнуться</button></td>
+		</tr>
+	</table>
+	<hr></hr> Монтаж видео: новости, ТВ-программы, аналитические видеообзоры, инфографика, рекламные ролики. Дизайн заставок, инфографики, рекламных материалов для видеороликов. Многокамерный монтаж.
+		Навыки по видеосъемкам и монтажу. Навыки по разработке дизайна заставок, инфографики, титров, рекламных видеороликов. Умение работать с различными форматами видео</a>
+	</div>
+	<h3>3D Animator</h3>
+	<div>
+	<table width="100%" cellspacing="0" cellpadding="0">
+		<tr> 
+			<td class="leftcol"><img src="images/Screenshot_3.png" width="400" height="300"></td>
+			<h1>3Д аниматор для крупнейшего канала! </h1></td>
+			<td class="leftcol"></td>
+			<td class="leftcol"></td>
+		</tr>
+		<tr></tr>
+		<tr></tr>
+		<tr> 
+			<td class="leftcol"  align="left"></td>
+			<td class="leftcol"  align="left"></td>
+			<td class="leftcol"></td>
+			<td class="leftcol"></td>
+			<td class="leftcol"></td>
+		</tr>
+		<tr>
+			<td class="leftcol" valign="middle">55000 ₽</td>
+			<td valign="middle"></td>
+			<td valign="middle"></td>
+			<td valign="middle"></td>
+			<td valign="middle" align="center"><button id="buyuegp1">Откликнуться</button></td>
+		</tr>
+	</table>
+	<hr></hr>Создание анимаций для персонажей, животных, техники. Анимация (риггинг, скиннинг, позы)</a>
+</div>
+	<h3>SMM-Специалист</h3>
+	<div><table width="100%" cellspacing="0" cellpadding="0">
+		<tr> 
+			<td class="leftcol"><img src="images/smm.png" width="400" height="300"></td>
+			<h1>Требуется сотрудник в компанию для привлечения клиентов!</h1>
+	
+		</tr>
+		<tr></tr>
+		<tr></tr>
+		<tr> 
+			<td class="leftcol"  align="left"></td>
+			<td class="leftcol"  align="left"></td>
+			<td class="leftcol"></td>
+			<td class="leftcol"></td>
+			<td class="leftcol"></td>
+		</tr>
+		<tr>
+			<td class="leftcol" valign="middle">30000 ₽</td>
+			<td valign="middle"></td>
+			<td valign="middle"></td>
+			<td valign="middle"></td>
+			<td valign="middle" align="center"><button id="buyudub">Откликнуться</button></td>
+		</tr>
+	</table>
+	<hr></hr>Развитие сообществ бренда: Instagram, VK, FB; разработка и реализация SMM-стратегии, контент-плана; оформление/дизайн и публикация сториз, постов, хайлайтс; ежедневное модерирование страниц в социальных сетях (комментарии, отметки, отзывы).
+	</div>
+	
+</div>
+<div id="dialog-form">
+  <form>
+    <fieldset>
+		<h4>Ваше ФИО <input type="text" id="fio" style = "ui-textfield"> </br> </h4>
+		<h4>Номер телефона <input type="text" id="autocomplete" style = "ui-textfield"> </br> </h4>
+		<h4>Стаж работы <input type="text" id="staj" style = "ui-textfield"> </br> </h4>
+		<h4>Сколько месяцев планируете работать
+		<select name="minbeds" id="minbeds">
+			<option>1</option>
+			<option>2</option>
+			<option>3</option>
+		</select> </h4>
+		<h4><div id="slider"> </br> </div></h4>
+		<h4>Когда вы планируете начать работу <input type="text" id="datevilet" style = "ui-textfield"></br> </h4>
+		<h4>Итого зарплата<input type="text" id = "result" style = "ui-textfield" readonly> </br> </h4>
+	</fieldset>
+  </form>
+</div>
+<div id="dialog-confirm" title="Оформить заявку?">
+    <fieldset>
+		<p>Проверьте необходимые данные перед отправлением заявки!</p>
+	</fieldset>
+</div>
+<div id="thankyou" title="Спасибо за отклик, мы перезвоним!">
+    <fieldset>
+		<p>До скорых встреч!</p>
+	</fieldset>
+</div>
+<div id="becareful" title="Проверьте правильность введенных данных">
+    <fieldset>
+		<p>Проверьте правильность всех полей</p>
+	</fieldset>
+</div>
+<script src="script/jquery/jquery.js"></script>
+<script src="jquery-ui.js"></script>
+<script>
+var price;
+$( "#accordion" ).accordion({collapsible: true});
+
+$( "#buyutur1" ).button()
+		.click(function(event){
+			price = 45000;
+			$( "#result" ).val(45000);
+			$( "#tempname" ).val("Отправка заявки");
+			$( "#dialog-form" ).dialog("option","title","Отправка заявки");
+			$( "#dialog-form" ).dialog( "open" );
+		});
+
+$( "#buyuegp1" ).button()
+		.click(function(){
+			price = 55000;
+			$( "#result" ).val(55000);
+			$( "#dialog-form" ).dialog("option","title","Отправка заявки");
+			$( "#dialog-form" ).dialog( "open" );
+        });
+        
+$( "#buyudub" ).button()
+		.click(function(){
+			price = 30000;
+			$( "#result" ).val(30000);
+			$( "#dialog-form" ).dialog("option","title","Отправка заявки");
+			$( "#dialog-form" ).dialog( "open" );
+        });
+	$('#datevilet').datepicker({
+	dateFormat : "dd.mm.yy",
+	minDate: new Date($('#hiddendelivdate').val()),
+	monthNames : ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'],
+	dayNamesMin : ['Вс','Пн','Вт','Ср','Чт','Пт','Сб'],
+});
+$('#dateprilet').datepicker({
+	dateFormat : "dd.mm.yy",
+	minDate: new Date($('#hiddendelivdate').val()),
+	monthNames : ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'],
+	dayNamesMin : ['Вс','Пн','Вт','Ср','Чт','Пт','Сб'],
+});
+	$( "#card" ).tooltip();
+	$( "#dialog-form" ).dialog({
+    autoOpen: false,
+    height: 550,
+    width: 500,
+    modal: true,
+    buttons: {
+        "Оформить": function() {
+			if ($('#fio').val() == '' || $('#datepicker').val() == '' || $('#autocomplete').val() == '' || $('#card').val() == ''){
+				$( "#becareful" ).dialog("open");
+			}
+			else {
+				$( "#dialog-confirm" ).dialog("open");
+			}
+        }
+		},
+		close : function(event, ui) {
+			$('#fio').val('');
+			$('#datepicker').val('');
+			$('#autocomplete').val('');
+			$('#card').val('');
+			slider.slider( "value", 0);
+			select[ 0 ].selectedIndex = 0;
+		}
+    });
+	var select = $( "#minbeds" )
+	.on( "change", function() {
+      slider.slider( "value", this.selectedIndex + 1 );
+		$( "#result" ).val(((this.selectedIndex+1)*price));
+    });
+	var slider = $( "#slider" ).slider({
+		min: 1,
+		max: 3,
+		range: "min",
+		value: select[ 0 ].selectedIndex + 1,
+		  slide: function( event, ui ) {
+			select[ 0 ].selectedIndex = ui.value - 1;
+			$( "#result" ).val((ui.value*price));
+		  }
+	});
+	var availableTags = [
+		"+79"
+	];
+	$( "#autocomplete" ).autocomplete({
+		source: availableTags
+	});
+		$( "#dialog-confirm" ).dialog({
+			autoOpen: false,
+			resizable: false,
+			height: "auto",
+			width: 400,
+			modal: true,
+			buttons: {
+					"Да, хочу работать и купить порше": function() {
+						$( this ).dialog( "close" );
+							$( "#dialog-form" ).dialog( "close");
+							$( "#thankyou" ).dialog("open");
+					},
+					"Нужно перепроверить": function() {
+						$( this ).dialog( "close" );
+						$( "#dialog-form" ).dialog( "close");
+					}
+				}
+			});
+			$( "#thankyou" ).dialog({
+			autoOpen: false,
+			resizable: false,
+			height: "auto",
+			width: 400,
+			modal: true,
+			buttons: {
+					"Закрыть": function() {
+						$( this ).dialog( "close" );
+					}
+				}
+			});
+			$( "#becareful" ).dialog({
+			autoOpen: false,
+			resizable: false,
+			height: "auto",
+			width: 400,
+			modal: true,
+			buttons: {
+					"Закрыть": function() {
+						$( this ).dialog( "close" );
+					}
+				}
+			});
+</script>
+</body>
+</html>
